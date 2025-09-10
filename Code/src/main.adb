@@ -1,5 +1,3 @@
-with MicroBit.Console; use MicroBit.Console;
-use MicroBit;
 -- USN PROJECT TEMPLATE INTELLIGENT REAL-TIME SYSTEMS
 -- Project name: [project name]
 -- Project members: [name, name, .. ]
@@ -17,11 +15,27 @@ use MicroBit;
 --  5) How to integrate your Ada project with a Unity project over USB
 
 -- Open a View > Cross Platforms > Serial Ports to see Put_Line output. Set the baud rate to 115.200
-procedure Main with Priority => 0 is
+with MicroBit.Console; use MicroBit.Console;
+use MicroBit;
+with MicroBit.DisplayRT;
+with MicroBit.DisplayRT.Symbols;
+with MicroBit.Buttons; use MicroBit.Buttons;
+use MicroBit;
 
+procedure Main with Priority => 0 is
 begin
-   Put_Line ("im'here");
    loop
-      null;
+   if MicroBit.Buttons.State (Button_A) = Pressed then
+      MicroBit.DisplayRT.Display ('A');
+      Put_Line ("Pressed A");
+   elsif MicroBit.Buttons.State (Button_B) = Pressed then
+      MicroBit.DisplayRT.Display ('B');
+      Put_Line ("Pressed B");
+   elsif MicroBit.Buttons.State (Logo) = Pressed then
+      DisplayRT.Symbols.Heart;
+      Put_Line ("Pressed L");
+   else
+      MicroBit.DisplayRT.Clear;
+   end if;
    end loop;
 end Main;
