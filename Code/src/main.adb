@@ -29,48 +29,39 @@ use MicroBit; --for pin names
 
 
 procedure Main is --with Priority => 0 is
-   My_Little_Melody : constant MicroBit.Music.Melody :=
-   ((C4,   400),
-   (G3,   800),
-   (B3,   400),
-   (Rest, 400),
-   (A3,   400),
-   (G3,   400));
 
    package sensor1 is new Ultrasonic(MB_P14, MB_P16);
 
    Distance : Distance_cm := 0;
-begin
-   MotorDriver.Servo(1,90);
 
+
+
+   task type Motor_Task is
+   end Motor_Task;
+
+   task body Motor_Task is
+      Delay_Time : constant Time_Span := Milliseconds (500);
+   begin
+      MotorDriver.Drive(Stop); --initially stop the motors
    loop
+         Distance := sensor1.Read;
+         Put_Line("Distance: " & Distance'Image);
+         if Distance < 20 then
+            MotorDriver.Drive(Backward, (4095,4095,4095,4095));
+            delay until Clock + Delay_Time;
+            MotorDriver.Drive(Right, (4095,4095,4095,4095));
+            delay until Clock + Delay_Time;
+            MotorDriver.Drive(Forward, (4095,4095,4095,4095));
+         else
+            MotorDriver.Drive(Forward, (4095,4095,4095,4095));
+         end if;
+         delay until Clock + Milliseconds(100);
+   end loop;
 
-
-   if MicroBit.Buttons.State (Button_A) = Pressed then
-      MicroBit.DisplayRT.Display ('A');
-      MotorDriver.Drive(Forward,(4095,4095,4095,4095)); --left front wheel to M2
-      delay until Clock + Milliseconds(1000);
-      Put_Line ("Pressed A");
-   elsif MicroBit.Buttons.State (Button_B) = Pressed then
-      MicroBit.DisplayRT.Display ('B');
-      MotorDriver.Drive(Backward,(4095,4095,4095,4095));
-      delay until Clock + Milliseconds(1000);
-      Put_Line ("Pressed B");
-   elsif MicroBit.Buttons.State (Logo) = Pressed then
-      DisplayRT.Symbols.Heart;
-      MotorDriver.Drive(Lateral_Left,(4095,4095,4095,4095));
-      delay until Clock + Milliseconds(1000);
-      Put_Line ("Pressed L");
-   else
-      MicroBit.DisplayRT.Clear;
-      MotorDriver.Drive(Stop,(0,0,0,0)); -- Stop all wheels
-      Put_Line ("");
-      Distance := sensor1.Read;
-      Put_Line ("Front: " & Distance_cm'Image(Distance)); -- a console line delay the loop significantly
-      delay until Clock + Milliseconds(50);
-      MicroBit.Music.Play (27, My_Little_Melody);
-
-   end if;
+   end Motor_Task;
+begin
+   loop
+      delay 1.0;
 
    end loop;
 end Main;
