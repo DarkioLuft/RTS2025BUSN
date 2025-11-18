@@ -4,7 +4,7 @@ with MicroBit.MotorDriver;  use MicroBit.MotorDriver;
 
 package body MyMotorDriver is
 
-   Speed : constant Analog_Value := 512; --between 0 and 1023 as defned before s
+   --Speed : constant Analog_Value := 512; --between 0 and 1023 as defned before s
 
    procedure DriveForward is
    begin
@@ -13,17 +13,17 @@ package body MyMotorDriver is
 
    procedure DriveBackward is
    begin
-      MicroBit.MotorDriver.Drive(Backward,(4095,4095,4095,4095));
+      MicroBit.MotorDriver.Drive(Backward,(2047,2047,2047,2047));
    end DriveBackward;
 
    procedure TurnLeft is
    begin
-      MicroBit.MotorDriver.Drive(Left,(4095,4095,4095,4095));
+      MicroBit.MotorDriver.Drive(Left,(1023,1023,1023,1023));
    end TurnLeft;
 
    procedure TurnRight is
    begin
-      MicroBit.MotorDriver.Drive(Right,(4095,4095,4095,4095));
+      MicroBit.MotorDriver.Drive(Right,(1023,1023,1023,1023));
    end TurnRight;
 
    procedure Stop is

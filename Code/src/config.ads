@@ -9,9 +9,10 @@ package Config is
    Priority_Sense : constant := 2;  --
    Priority_Act   : constant := 1;  --
 
-   --Decision thresholds (in meters, of course)
-   Obstacle_Threshold_m : constant := 0.25;
-   Caution_Threshold_m  : constant := 0.40;
+   --Decision thresholds (in Centimeters)
+   Danger_Threshold_cm : constant := 5;
+   Obstacle_Threshold_cm : constant := 20;
+   Caution_Threshold_cm  : constant := 40;
 
    --The motor speed, from the analog_value: value from 0-1023)
    Speed_Fast   : constant := 512;

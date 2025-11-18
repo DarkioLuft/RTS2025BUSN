@@ -9,7 +9,7 @@ package body TaskSense is
    task body Sense is
       myClock : Time;
 
-      --instantiate ultrasonic sensors for both sensors 
+      --instantiate ultrasonic sensors for both sensors
       package Sensor_Left  is new MicroBit.Ultrasonic (MB_P13, MB_P1);  --trig P13, echo P1, translated to actual MicroBit Pins
       package Sensor_Right is new MicroBit.Ultrasonic (MB_P12, MB_P0);  --trig P12, echo P0
 

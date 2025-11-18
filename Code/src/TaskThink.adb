@@ -27,16 +27,19 @@ package body TaskThink is
                MyMotorDriver.MotorDriver.SetDirection (Stop);
             else
                -- Normal decision logic based on thresholds
-               if Dist_Left > 20 and Dist_Right > 20 then
-                  MyMotorDriver.MotorDriver.SetDirection (Forward);
-               elsif Dist_Left < 10 and Dist_Right < 10 then
-                  MyMotorDriver.MotorDriver.SetDirection (Backward);
-               elsif Dist_Left < 10 or Dist_Right < 10 then
+               if Dist_Left < Config.Danger_Threshold_cm or Dist_Right < Config.Danger_Threshold_cm then
                   MyMotorDriver.MotorDriver.SetDirection (Stop);
-               elsif Dist_Left < Dist_Right then
-                  MyMotorDriver.MotorDriver.SetDirection (Left);
-               else
+                  MyMotorDriver.MotorDriver.SetDirection (Backward);
+               elsif Dist_Left < Config.Obstacle_Threshold_cm and Dist_Right < Config.Obstacle_Threshold_cm then
+                  MyMotorDriver.MotorDriver.SetDirection (Backward);
+               elsif Dist_Left > Config.Obstacle_Threshold_cm and Dist_Right > Config.Obstacle_Threshold_cm then
+                  MyMotorDriver.MotorDriver.SetDirection (Forward);
+               elsif Dist_Left = Dist_Right then
                   MyMotorDriver.MotorDriver.SetDirection (Right);
+               elsif Dist_Left < Dist_Right then
+                  MyMotorDriver.MotorDriver.SetDirection (Right);
+               else
+                  MyMotorDriver.MotorDriver.SetDirection (Left);
                end if;
             end if;
          end;
