@@ -3,7 +3,7 @@ with MicroBit;              use MicroBit;
 with MicroBit.Ultrasonic;
 with MyBrain;
 with MicroBit.Console; use MicroBit.Console;
-
+--just a comment to change the caseSensitivity of git
 package body TaskSense is
 
    task body Sense is
