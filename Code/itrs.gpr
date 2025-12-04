@@ -23,7 +23,7 @@ project Itrs is
       for Switches ("ada") use ("-g");
    end Builder;
 
-  package Linker is
+   package Linker is
       for Switches ("ada") use ("-g", "-Wl,--print-memory-usage");
    end Linker;
 
