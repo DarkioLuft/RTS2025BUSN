@@ -12,7 +12,7 @@ with TaskSense;
 
 
 procedure Main is
-   --just a comment to change the caseSensitivity of git
+
    --this is the instantiate of the two sensors on different pins
    --package Sensor_Left  is new MicroBit.Ultrasonic (MB_P13, MB_P1);
    --package Sensor_Right is new MicroBit.Ultrasonic (MB_P12, MB_P0);

@@ -2,7 +2,7 @@ with Ada.Real_Time; use Ada.Real_Time;
 with MyMotorDriver;
 with MicroBit.Console; use MicroBit.Console;
 with MicroBit.MotorDriver; use MicroBit.MotorDriver;
---just a comment to change the caseSensitivity of git
+
 package body TaskAct is
 
    task body Act is
