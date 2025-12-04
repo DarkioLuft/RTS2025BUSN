@@ -8,6 +8,9 @@ with MicroBit; use MicroBit;
 with TaskAct;
 with TaskThink;
 with TaskSense;
+-- USN PROJECT TEMPLATE INTELLIGENT REAL-TIME SYSTEMS
+-- Project name: [project name]
+-- Project members: [name, name, .. ]
 
 
 
